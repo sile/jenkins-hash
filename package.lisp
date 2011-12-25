@@ -4,11 +4,13 @@
   (:export hash-octets
            hash-string
            hash-u32-array
+           double-hash
            hash)) ; XXX: delete
 (in-package :jenkins-hash)
 
 (deftype u32 () '(unsigned-byte 32))
 (deftype array-index () '(unsigned-byte 24)) ; XXX:
+(deftype index () '(unsigned-byte 24)) ; XXX:
 
 (deftype u8 () '(unsigned-byte 8))
 (deftype simple-octets () '(simple-array u8))

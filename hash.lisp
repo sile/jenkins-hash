@@ -3,7 +3,8 @@
 (declaim (inline hash-octets)
          (ftype (function (simple-octets &optional u32 u32) (values u32 u32)) hash-octets)
 
-         )
+         (inline double-hash)
+         (ftype (function (u32 u32 index) u32) double-hash))
 
 (defun hash-octets (octets &optional (initial-value 7) (secondary-initial-value 0))
   (declare #.*muffle*)
@@ -16,3 +17,6 @@
 (defun hash-u32-array (u32-array)
   (declare (ignore u32-array))
   )
+
+(defun double-hash (hashcode-1 hashcode-2 nth)
+  (u32 (+ hashcode-1 (* hashcode-2 nth))))
