@@ -7,7 +7,7 @@
 
 
 [バージョン]
-・0.0.1
+・0.0.2
 
 
 [インストール]
@@ -28,19 +28,23 @@ $ lisp
 Package# jenkins-hash
 　メインパッケージ
 
-Function# (hash-string str &key seed1 seed2) => (values hashcode1 hashcode2)
+Function# (hash-string str &key start end seed1 seed2) => (values hashcode1 hashcode2)
 　引数の文字列のハッシュ値を計算する。
 　一つの文字列に対して二つのハッシュ値を返す。
 　　- str: キー文字列 ::(simple-array character)
+　　- start: str内での対象部分の開始位置 ::(unsigned-byte 24)
+　　- end: str内での対象部分の終端位置 ::(unsigned-byte 24)
 　　- seed1: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
 　　- seed2: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
 　　- hashcode1: 算出されたハッシュ値 ::(unsigned-byte 32)
 　　- hashcode2: 算出されたハッシュ値 ::(unsigned-byte 32)
 
-Function# (hash-octets octets &key seed1 seed2) => (values hashcode1 hashcode2)
+Function# (hash-octets octets &key start end seed1 seed2) => (values hashcode1 hashcode2)
 　引数のバイト列のハッシュ値を計算する。
 　一つのバイト列対して二つのハッシュ値を返す。
 　　- octets: キーバイト列 ::(simple-array (unsigned-byte 8))
+　　- start: str内での対象部分の開始位置 ::(unsigned-byte 24)
+　　- end: str内での対象部分の終端位置 ::(unsigned-byte 24)
 　　- seed1: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
 　　- seed2: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
 　　- hashcode1: 算出されたハッシュ値 ::(unsigned-byte 32)

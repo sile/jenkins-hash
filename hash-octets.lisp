@@ -4,17 +4,17 @@
   `(logior ,@(loop FOR i FROM 0 BELOW width 
                    COLLECT `(ash (aref ,octets (+ ,start ,i)) ,(* i 8)))))
 
-(defun @hash-octets2 (octets init-primary init-secondary &aux (len (length octets)))
+(defun @hash-octets2 (octets start end init-primary init-secondary &aux (len (- end start)))
   (declare #.*fastest*
            (simple-octets octets)
            (u32 init-primary init-secondary)
-           (index len))
+           (index start end len))
   (let* ((a (u32 (+ +INIT_MAGIC+ len init-primary)))
          (b a)
          (c (u32 (+ a init-secondary))))
     (declare (u32 a b c))
     
-    (loop FOR i FROM 0 BELOW (- len 12) BY 12
+    (loop FOR i FROM start BELOW (- end 12) BY 12
       DO
       (incf-u32 a (ref-uint octets (+ i 0) 4))
       (incf-u32 b (ref-uint octets (+ i 4) 4))
@@ -23,7 +23,7 @@
 
       FINALLY
       (tagbody
-       (case (the (mod 13) (- len i))
+       (case (the (mod 13) (- end i))
          (12 (go :12)) (11 (go :11)) (10 (go :10)) (09 (go :09))
          (08 (go :08)) (07 (go :07)) (06 (go :06)) (05 (go :05))
          (04 (go :04)) (03 (go :03)) (02 (go :02)) (01 (go :01))
