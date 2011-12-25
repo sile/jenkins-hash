@@ -8,7 +8,7 @@
   (declare #.*fastest*
            (simple-octets octets)
            (u32 init-primary init-secondary)
-           (array-index len))
+           (index len))
   (let* ((a (u32 (+ +INIT_MAGIC+ len init-primary)))
          (b a)
          (c (u32 (+ a init-secondary))))

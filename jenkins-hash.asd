@@ -8,7 +8,7 @@
   
   :serial t
   :components ((:file "package")
-               (:file "utils")
+               (:file "common")
                (:file "hash-octets")
                (:file "hash-string")
                (:file "hash")))

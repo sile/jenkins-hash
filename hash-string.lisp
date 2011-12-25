@@ -4,7 +4,7 @@
   (declare #.*fastest*
            (simple-characters str)
            (u32 init-primary init-secondary)
-           (array-index len))
+           (index len))
   (let* ((a (u32 (+ +INIT_MAGIC+ (ash len 2) init-primary)))
          (b a)
          (c (u32 (+ a init-secondary))))

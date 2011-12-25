@@ -1,16 +1,18 @@
-;; TODO: util => common
 (in-package :jenkins-hash)
 
-(declaim (inline u32 rot))
+(declaim (inline u32 rot double-hash))
 
 ;; auxiliary
 (defun u32 (n)
   (ldb (byte 32 0) n))
 
+(defmacro incf-u32 (place delta)
+  `(setf ,place (u32 (+ ,place ,delta))))
+
 (defun rot (x k)
   (logior (ash x k) (ash x (- k 32))))
 
-;;; mix          
+;; mix
 (defmacro mix-one (a b c n)
   `(setf ,a (u32 (- ,a ,c))
          ,a (u32 (logxor ,a (rot ,c ,n)))
@@ -27,8 +29,7 @@
     (mix-one ,b ,c ,a 19)
     (mix-one ,c ,a ,b 04)))
 
-
-;;; final
+;; final
 (defmacro final-one (a b n)
   `(setf ,a (u32 (- (logxor ,a ,b) (rot ,b ,n)))))
 
@@ -44,7 +45,7 @@
     (final-one ,b ,a 14)
     (final-one ,c ,b 24)))
 
-(defmacro incf-u32 (place delta)
-  `(setf ,place (u32 (+ ,place ,delta))))
+;; double hashing
+(defun double-hash (hashcode-1 hashcode-2 nth)
+  (u32 (+ hashcode-1 (* hashcode-2 nth))))
 
-;;; TODO: hashword, hashword2
