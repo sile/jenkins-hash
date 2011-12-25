@@ -11,4 +11,5 @@
                (:file "byte-order")
                (:file "utils")
                (:file "hash-little")
+               (:file "hash-octets")
                (:file "hash")))

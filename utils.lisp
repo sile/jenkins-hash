@@ -44,4 +44,7 @@
     (final-one ,b ,a 14)
     (final-one ,c ,b 24)))
 
+(defmacro incf-u32 (place delta)
+  `(setf ,place (u32 (+ ,place ,delta))))
+
 ;;; TODO: hashword, hashword2
