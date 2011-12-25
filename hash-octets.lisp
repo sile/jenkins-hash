@@ -4,7 +4,7 @@
   `(logior ,@(loop FOR i FROM 0 BELOW width 
                    COLLECT `(ash (aref ,octets (+ ,start ,i)) ,(* i 8)))))
 
-(defun hash-octets2 (octets init-primary init-secondary &aux (len (length octets)))
+(defun @hash-octets2 (octets init-primary init-secondary &aux (len (length octets)))
   (declare #.*fastest*
            (simple-octets octets)
            (u32 init-primary init-secondary)
