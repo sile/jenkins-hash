@@ -1,3 +1,4 @@
+;; TODO: util => common
 (in-package :jenkins-hash)
 
 (declaim (inline u32 rot))
@@ -42,3 +43,5 @@
     (final-one ,a ,c 04)
     (final-one ,b ,a 14)
     (final-one ,c ,b 24)))
+
+;;; TODO: hashword, hashword2
