@@ -10,7 +10,7 @@
          (c (u32 (+ a init-secondary))))
     (declare (u32 a b c))
     
-    (loop FOR i FROM 0 BELOW (- len 3)
+    (loop FOR i FROM 0 BELOW (- len 3) BY 3
       DO
       (incf-u32 a (char-code (aref str (+ i 0))))
       (incf-u32 b (char-code (aref str (+ i 1))))
@@ -19,7 +19,7 @@
 
       FINALLY
       (tagbody
-       (case (- len i)
+       (case (the (mod 4) (- len i))
          (3 (go :3))
          (2 (go :2))
          (1 (go :1))

@@ -48,4 +48,3 @@
 ;; double hashing
 (defun double-hash (hashcode-1 hashcode-2 nth)
   (u32 (+ hashcode-1 (* hashcode-2 nth))))
-
