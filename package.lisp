@@ -15,6 +15,12 @@
 (deftype u8 () '(unsigned-byte 8))
 (deftype simple-octets () '(simple-array u8))
 
+(deftype simple-u32-array () '(simple-array u32))
+
+(deftype simple-characters () '(simple-array character))
+
 (defparameter *fastest* '(optimize (speed 3) (safety 0) (debug 0) (compilation-speed 0)))
 (defparameter *muffle* #+SBCL '(sb-ext:muffle-conditions sb-ext:compiler-note)
                        #-SBCL '())
+
+(defconstant +INIT_MAGIC+ #xDEADBEEF)
