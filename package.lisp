@@ -3,9 +3,7 @@
   (:shadow :common-lisp hash)
   (:export hash-octets
            hash-string
-           hash-u32-array
-           double-hash
-           hash)) ; XXX: delete
+           double-hash))
 (in-package :jenkins-hash)
 
 (deftype u32 () '(unsigned-byte 32))
@@ -24,3 +22,6 @@
                        #-SBCL '())
 
 (defconstant +INIT_MAGIC+ #xDEADBEEF)
+
+(defconstant +GOLDEN_RATIO_PRIME+
+  (+ (expt 2 31)  (expt 2 29) (- (expt 2 25)) (expt 2 22) (- (expt 2 19)) (- (expt 2 16)) 1))

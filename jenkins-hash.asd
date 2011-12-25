@@ -10,6 +10,5 @@
   :components ((:file "package")
                (:file "utils")
                (:file "hash-octets")
-               (:file "hash-u32-array")
                (:file "hash-string")
                (:file "hash")))
