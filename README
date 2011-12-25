@@ -1,1 +1,55 @@
-- http://burtleburtle.net/bob/hash/doobs.html
+[概要]
+・Jenkinsハッシュ関数のCommonLisp実装
+　・http://burtleburtle.net/bob/hash/doobs.html
+
+・文字列 or バイト列に対して良質なハッシュ値(32bit)を算出
+・一つのキーに対して複数(任意個)のハッシュ値を安価に算出可能
+
+
+[バージョン]
+・0.0.1
+
+
+[インストール]
+## asdf-install
+$ lisp
+> (require :asdf-install)
+> (asdf-install:install :jenkins-hash-x.x.x.tar.gz)
+
+## asdf
+$ tar zxvf jenkins-hash-x.x.x.tar.gz
+$ cd jenkins-hash-x.x.x/
+$ lisp
+> (require :asdf)
+> (asdf:load-system :jenkins-hash)
+
+
+[API]
+Package# jenkins-hash
+　メインパッケージ
+
+Function# (hash-string str &key seed1 seed2) => (values hashcode1 hashcode2)
+　引数の文字列のハッシュ値を計算する。
+　一つの文字列に対して二つのハッシュ値を返す。
+　　- str: キー文字列 ::(simple-array character)
+　　- seed1: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
+　　- seed2: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
+　　- hashcode1: 算出されたハッシュ値 ::(unsigned-byte 32)
+　　- hashcode2: 算出されたハッシュ値 ::(unsigned-byte 32)
+
+Function# (hash-octets octets &key seed1 seed2) => (values hashcode1 hashcode2)
+　引数のバイト列のハッシュ値を計算する。
+　一つのバイト列対して二つのハッシュ値を返す。
+　　- octets: キーバイト列 ::(simple-array (unsigned-byte 8))
+　　- seed1: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
+　　- seed2: ハッシュ値算出の際に使用されるパラメータ ::(unsigned-byte 32)
+　　- hashcode1: 算出されたハッシュ値 ::(unsigned-byte 32)
+　　- hashcode2: 算出されたハッシュ値 ::(unsigned-byte 32)
+
+Function# (nth-hash nth hashcode1 hashcode2) => hashcode
+　二つのハッシュ値から、DoubleHashingを用いて、N番目のハッシュ値を算出する。
+　※ hash-string関数等の返り値を元にして、一つにキーに対して任意個のハッシュ値が算出可能
+　　- nth: N番目のN。実際には只のハッシュ値算出の際のパラメータ ::(unsigned-byte 24)
+　　- hashcode1: ベースとなるハッシュ値 ::(unsigned-byte 32)
+　　- hashcode2: ベースとなるハッシュ値 ::(unsigned-byte 32)
+　　- hashcode: 算出されたハッシュ値 ::(unsigned-byte 32)
