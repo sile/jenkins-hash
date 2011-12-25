@@ -8,7 +8,6 @@
   
   :serial t
   :components ((:file "package")
-               (:file "byte-order") ; TODO: remove
                (:file "utils")
                (:file "hash-octets")
                (:file "hash-u32-array")
